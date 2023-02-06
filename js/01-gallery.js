@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items.js';
 
 const galleryEl = document.querySelector('.gallery');
 
-const galleryItemsEl = galleryItems
+galleryEl.innerHTML = galleryItems
   .map(item => {
     return `
     <div class="gallery__item">
@@ -19,8 +19,6 @@ const galleryItemsEl = galleryItems
   })
   .join('');
 
-galleryEl.innerHTML = galleryItemsEl;
-
 galleryEl.addEventListener('click', onImgClick);
 
 function onImgClick(e) {
@@ -30,20 +28,16 @@ function onImgClick(e) {
     return;
   }
 
-  showModal(e);
-
-  window.addEventListener('keydown', onKeyDownHideModal, { once: true });
-}
-
-function showModal(e) {
   const instance = basicLightbox.create(
     `<img src="${e.target.dataset.source}" width="1280" height="600">`
   );
-  instance.show();
-}
 
-function onKeyDownHideModal(e) {
-  if (e.code === 'Escape') {
-    document.querySelector('.basicLightbox').remove();
-  }
+  instance.show();
+
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Escape') {
+      instance.close();
+      //   document.querySelector('.basicLightbox').remove(); - працює швидше за instance.close()
+    }
+  });
 }
