@@ -24,5 +24,5 @@ function onImgClick(e) {
   if (e.target.classList.value !== 'gallery__image') {
     return;
   }
-  lightbox.on('show.simplelightbox', () => {});
+  lightbox.on('show.simplelightbox');
 }
