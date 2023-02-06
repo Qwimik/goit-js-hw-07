@@ -16,13 +16,4 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-galleryEl.addEventListener('click', onImgClick);
-
-function onImgClick(e) {
-  e.preventDefault();
-
-  if (e.target.classList.value !== 'gallery__image') {
-    return;
-  }
-  lightbox.on('show.simplelightbox');
-}
+lightbox.on('show.simplelightbox');
